@@ -1,5 +1,5 @@
 ---
-import Welcome from '../components/Welcome.astro';
+
 import Layout from '../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -7,5 +7,52 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<r-grid columns="12" columns-s="4" columns-xs="2">
+		<r-cell span="1-12" span-s="row" span-xs="row">
+			<header class="intro">
+				<h1>Custom Astro Template</h1>
+				<p>This is a starter template using your custom CSS system.</p>
+			</header>
+		</r-cell>
+
+		<r-cell span="1-8" span-s="1-4" span-xs="row">
+			<article>
+				<h2>Typography</h2>
+				<p>
+					The font stack uses <strong>Inter</strong> for UI elements and <strong>Source Serif 4</strong> for headings.
+				</p>
+				<h3>Heading Level 3</h3>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.
+					Vivamus hendrerit arcu sed erat molestie vehicula.
+				</p>
+				<ul>
+					<li>List item one</li>
+					<li>List item two</li>
+					<li>List item three</li>
+				</ul>
+			</article>
+		</r-cell>
+
+		<r-cell span="9-12" span-s="1-4" span-xs="row">
+			<aside class="tidbit">
+				<h2>Sidebar</h2>
+				<p>This sidebar demonstrates the grid layout capabilities.</p>
+				<nav class="menu">
+					<div class="focus1">
+						<a href="#">Home</a>
+					</div>
+					<a href="#">About</a>
+					<a href="#">Projects</a>
+					<a href="#">Contact</a>
+				</nav>
+			</aside>
+		</r-cell>
+
+		<r-cell span="1-12" span-s="row" span-xs="row" class="text-small">
+			<footer>
+				<p>&copy; 2024 Your Name. All rights reserved.</p>
+			</footer>
+		</r-cell>
+	</r-grid>
 </Layout>
