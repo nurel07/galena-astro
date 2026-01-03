@@ -76,7 +76,7 @@ const imageBg = displayData.dominantColors && displayData.dominantColors.length 
         {displayData.name}, {displayData.creationDate}
       </h3>
 
-      <p class="text-medium" style="margin-bottom: 3rem;">
+      <p class="text-medium" style="margin-bottom: 10rem;">
         {displayData.description}
       </p>
 
@@ -86,6 +86,10 @@ const imageBg = displayData.dominantColors && displayData.dominantColors.length 
           <Fragment set:html={appleIcon} />
           Download Basalt for Mac
           </Button>
+
+          <p class="text-small" style="margin-top: 1.5rem; color: var(--stone-500);">
+            All artworks featured in Basalt are sourced from the public domain (CC0).
+          </p>
       </div>
 
     </r-cell>

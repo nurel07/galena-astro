@@ -140,7 +140,7 @@ r-grid {
     margin: 0 auto;
     background: #ffffff;
     /* Fluid padding: 4rem (64px) on mobile to 16rem (256px) on desktop */
-    padding: 8rem clamp(4rem, -0.15rem + 20vw, 16rem);
+    padding: 8rem clamp(4rem, -0.15rem + 20vw, 16rem) 2rem;
 }
 
 r-cell {
