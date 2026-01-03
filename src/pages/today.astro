@@ -44,7 +44,7 @@ const imageBg = displayData.dominantColors && displayData.dominantColors.length 
   : 'var(--stone-200)';
 ---
 
-<Layout title="Today's Art - Basalt" backgroundColor={imageBg}>
+<Layout title={`Today's Art: ${displayData.name}`} backgroundColor={imageBg}>
   
   <!-- Hero Section (Outside Grid, Max 1248px) -->
   <div class="hero-wrapper">
@@ -81,7 +81,7 @@ const imageBg = displayData.dominantColors && displayData.dominantColors.length 
       </p>
 
       <!-- Action Base -->
-      <div style="width: max-content;">
+      <div>
           <Button href="https://basalt.app/download" target="_blank">
           <Fragment set:html={appleIcon} />
           Download Basalt for Mac
