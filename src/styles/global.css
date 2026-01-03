@@ -221,7 +221,7 @@ r-cell[order="-1"] {
 /* Responsive: S (Tablet/Small Laptop - e.g. < 900px) */
 @media (max-width: 900px) {
     r-grid[columns-s="4"] {
-        --grid-columns: 4;
+        --grid-columns: 2;
     }
 
     r-cell[span-s="1"] {
@@ -256,7 +256,7 @@ r-cell[order="-1"] {
 /* Responsive: XS (Mobile - e.g. < 600px) */
 @media (max-width: 600px) {
     r-grid[columns-xs="2"] {
-        --grid-columns: 2;
+        --grid-columns: 1;
     }
 
     r-grid {
