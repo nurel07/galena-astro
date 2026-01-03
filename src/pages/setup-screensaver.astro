@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { CldImage } from 'astro-cloudinary';
+import Header from '../components/Header.astro';
 ---
 
 <Layout title="How to Set Up the Basalt Screensaver" backgroundColor="var(--stone-200)">
 <r-grid class="main" columns="6" columns-s="4" columns-xs="1">
 
   <r-cell order="-10" span="6" span-s="4" class="intro">
+    <Header />
     <h1>How to Set Up the Basalt Screensaver</h1>
     <p>
       Use these instructions to turn your daily wallpaper into a native macOS screensaver.
@@ -67,7 +69,7 @@ import { CldImage } from 'astro-cloudinary';
   <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
     <h3>Step 4: Choose Source Type</h3>
     <p>
-      In the settings window, scroll to the bottom and click the <strong>Choose photos</strong> option.
+      In the settings window, scroll to the bottom and click the <strong>Photos</strong> option.
     </p>
      <div style="margin-top: 1rem;">
      <CldImage

@@ -14,18 +14,18 @@
     --fs-small: clamp(0.8125rem, 0.75rem + 0.2vw, 0.875rem);
     /* 13px → 14px */
 
-    /* Stone Palette */
-    --stone-50: #FEFBF6;
-    --stone-100: #F6F3EE;
-    --stone-200: #E6E3DF;
-    --stone-300: #D1CECA;
-    --stone-400: #BDBAB5;
-    --stone-500: #A9A6A2;
-    --stone-600: #86847F;
-    --stone-700: #6C6965;
-    --stone-800: #4A4846;
-    --stone-900: #302E2B;
-    --stone-950: #161411;
+    /* Stone Palette (OKLCH) */
+    --stone-50: oklch(98.8% 0.004 85);
+    --stone-100: oklch(96.5% 0.006 85);
+    --stone-200: oklch(90.5% 0.007 85);
+    --stone-300: oklch(83.5% 0.007 85);
+    --stone-400: oklch(76.5% 0.007 85);
+    --stone-500: oklch(69.5% 0.007 85);
+    --stone-600: oklch(56.5% 0.007 85);
+    --stone-700: oklch(46.5% 0.007 85);
+    --stone-800: oklch(34.5% 0.007 85);
+    --stone-900: oklch(27.9% 0.009 82);
+    --stone-950: oklch(13.5% 0.008 80);
 }
 
 /* Global Reset */
