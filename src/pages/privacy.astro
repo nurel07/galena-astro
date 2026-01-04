@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import basaltFavicon from "../assets/basalt-favicon.svg?raw";
+
+const lastUpdated = "January 4, 2026";
+---
+
+<Layout title="Privacy Policy - Basalt" backgroundColor="var(--stone-200)">
+	<r-grid class="main content-grid" columns="6" columns-s="4" columns-xs="1">
+		<r-cell span="6" span-s="row" span-xs="row" class="content">
+			<!-- Label -->
+			<div class="label">
+				<div class="icon-b">
+					<Fragment set:html={basaltFavicon} />
+				</div>
+				<span
+					class="text-small"
+					style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"
+					>Legal</span
+				>
+			</div>
+
+			<!-- Typography -->
+			<h1>Privacy Policy</h1>
+			<h3
+				style="color: var(--stone-600); margin-top: 0.5rem; margin-bottom: 4rem;"
+			>
+				Last updated: {lastUpdated}
+			</h3>
+
+			<div class="text-medium" style="margin-bottom: 10rem;">
+				<h4>1. Overview</h4>
+				<p>
+					Basalt ("we", "our", or "us") operates the Basalt macOS
+					application. We are committed to protecting your privacy.
+					This policy details how we handle your data.
+				</p>
+
+				<h4>2. Data Collection</h4>
+				<p>
+					We do not collect, store, or share any personal data from
+					our users. The Application functions anonymously without
+					user accounts or registration.
+				</p>
+
+				<h4>3. Local Storage</h4>
+				<p>
+					The Application creates a local folder on your Mac (located
+					in the Application Support directory) to store downloaded
+					wallpapers. This data resides solely on your device and is
+					never transmitted to us or any third party.
+				</p>
+
+				<h4>4. Network and Server Logs</h4>
+				<p>
+					The Application communicates with our backend infrastructure
+					to fetch wallpaper metadata. Like most internet services,
+					our servers automatically collect standard log data (such as
+					IP address, request time, and user agent) for security,
+					performance monitoring, and troubleshooting purposes. This
+					data is transient, not linked to any personal identity, and
+					is not used for tracking or analytics.
+				</p>
+
+				<h4>5. Contact Us</h4>
+				<p>
+					If you have any questions about this Privacy Policy, please
+					contact us at: <br /><br />
+					<a href="mailto:hello@yevgenglukhov.com"
+						>hello@yevgenglukhov.com</a
+					>
+				</p>
+			</div>
+		</r-cell>
+	</r-grid>
+</Layout>
+
+<style>
+	.content-grid {
+		padding-top: 6rem;
+	}
+
+	/* Responsive adjustment */
+	@media (max-width: 600px) {
+		.content-grid {
+			padding-top: 4rem;
+		}
+	}
+
+	.label {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1.5rem;
+		color: var(--stone-900);
+	}
+
+	.icon-b {
+		width: 24px;
+		height: 24px;
+	}
+
+	.icon-b :global(svg) {
+		width: 100%;
+		height: 100%;
+		fill: currentColor;
+	}
+
+	h2 {
+		margin-top: 2.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	p {
+		margin-bottom: 1.5rem;
+	}
+</style>
