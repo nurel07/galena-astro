@@ -4,6 +4,8 @@ interface Props {
 	backgroundColor?: string;
 }
 
+import Footer from "../components/Footer.astro";
+
 const { title = "Astro Basics", backgroundColor } = Astro.props;
 ---
 
@@ -15,12 +17,18 @@ const { title = "Astro Basics", backgroundColor } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..900;1,8..60,400..900&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..900;1,8..60,400..900&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body style={backgroundColor ? `--page-bg: ${backgroundColor}` : ""}>
-		<slot />
+		<div class="layout-wrapper">
+			<slot />
+			<Footer />
+		</div>
 	</body>
 </html>
 

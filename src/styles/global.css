@@ -58,6 +58,9 @@ body {
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
     /* Good reading height */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Links */
@@ -122,25 +125,43 @@ small {
 /* Lists */
 ol,
 ul {
-    padding-left: 3rem;
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
-li {
-    margin-bottom: 1rem;
+.layout-wrapper {
+    width: 100%;
+    max-width: 1246px;
+    /* 1200 + padding */
+    margin: 0 auto;
+    background: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Move horizontal padding back to r-grid for full-bleed support */
+    box-sizing: border-box;
+}
+
+/* Links */
+a {
+    color: var(--stone-900);
 }
 
 /* Grid System */
 r-grid {
     display: grid;
-    grid-template-columns: repeat(var(--grid-columns, 6), 1fr);
-    gap: clamp(1rem, 0.5rem + 2vw, 2rem);
+    /* Flatten minmax for full control */
+    grid-template-columns: repeat(var(--grid-columns), 1fr);
     /* Fluid gap */
-    max-width: 1246px;
-    margin: 0 auto;
-    background: #ffffff;
-    /* Fluid padding: 4rem (64px) on mobile to 16rem (256px) on desktop */
-    padding: 8rem clamp(4rem, -0.15rem + 20vw, 16rem) 2rem;
+    gap: clamp(1rem, 0.5rem + 2.6vw, 2.5rem);
+    /* No max-width or margin here anymore, wrapper handles it */
+    /* Padding for content inside the wrapper */
+    padding: 0 clamp(4rem, -0.15rem + 20vw, 16rem);
+}
+
+.page-grid {
+    padding-top: 8rem;
+    padding-bottom: 2rem;
 }
 
 r-cell {

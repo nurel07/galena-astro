@@ -1,0 +1,110 @@
+---
+import Layout from "../layouts/Layout.astro";
+import basaltFavicon from "../assets/basalt-favicon.svg?raw";
+---
+
+<Layout title="App Support - Basalt" backgroundColor="var(--stone-200)">
+    <r-grid
+        class="main content-grid page-grid"
+        columns="6"
+        columns-s="4"
+        columns-xs="1"
+    >
+        <r-cell span="6" span-s="row" span-xs="row" class="content">
+            <!-- Label -->
+            <div class="label">
+                <div class="icon-b">
+                    <Fragment set:html={basaltFavicon} />
+                </div>
+                <span
+                    class="text-small"
+                    style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"
+                    >Help</span
+                >
+            </div>
+
+            <!-- Typography -->
+            <h1>App Support</h1>
+            <h3
+                style="color: var(--stone-600); margin-top: 0.5rem; margin-bottom: 4rem;"
+            >
+                Need help with Basalt?
+            </h3>
+
+            <div class="text-medium" style="margin-bottom: 10rem;">
+                <h4>Contact Support</h4>
+                <p>
+                    If you're experiencing issues, have feature requests, or
+                    just want to say hello, I'm here to help.
+                </p>
+                <p>
+                    You can reach me directly via email at: <br /><br />
+                    <a href="mailto:hello@yevgenglukhov.com"
+                        >hello@yevgenglukhov.com</a
+                    >
+                </p>
+                <p>I typically respond within 24 hours.</p>
+
+                <h4>Frequently Asked Questions</h4>
+                <p>
+                    <strong>Where does the wallpaper come from?</strong><br />
+                    Basalt curates a new wallpaper every day from the public domain
+                    or AI generated collection.
+                </p>
+                <p>
+                    <strong>How do I set up the screensaver?</strong><br />
+                    You can follow our step-by-step guide on the <a
+                        href="/setup-screensaver">Screensaver Setup</a
+                    > page.
+                </p>
+                <p>
+                    <strong>Is my data private?</strong><br />
+                    Yes. Basalt does not collect any personal data. See the <a
+                        href="/privacy">Privacy Policy</a
+                    > for more details.
+                </p>
+            </div>
+        </r-cell>
+    </r-grid>
+</Layout>
+
+<style>
+    .content-grid {
+        padding-top: 6rem;
+    }
+
+    /* Responsive adjustment */
+    @media (max-width: 600px) {
+        .content-grid {
+            padding-top: 4rem;
+        }
+    }
+
+    .label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        color: var(--stone-900);
+    }
+
+    .icon-b {
+        width: 24px;
+        height: 24px;
+    }
+
+    .icon-b :global(svg) {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
+    }
+
+    h2 {
+        margin-top: 2.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    p {
+        margin-bottom: 1.5rem;
+    }
+</style>

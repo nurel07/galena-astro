@@ -1,120 +1,131 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { CldImage } from 'astro-cloudinary';
-import Header from '../components/Header.astro';
-import Button from '../components/Button.astro';
-import appleIcon from '../assets/apple-icon.svg?raw';
+import Layout from "../layouts/Layout.astro";
+import { CldImage } from "astro-cloudinary";
+import Header from "../components/Header.astro";
+import Button from "../components/Button.astro";
+import appleIcon from "../assets/apple-icon.svg?raw";
 ---
 
-<Layout title="How to Set Up the Basalt Screensaver" backgroundColor="var(--stone-200)">
-<r-grid class="main" columns="6" columns-s="4" columns-xs="1">
+<Layout
+  title="How to Set Up the Basalt Screensaver"
+  backgroundColor="var(--stone-200)"
+>
+  <r-grid class="main page-grid" columns="6" columns-s="4" columns-xs="1">
+    <r-cell order="-10" span="6" span-s="4" class="intro">
+      <Header />
+      <h1>How to Set Up the Basalt Screensaver</h1>
+      <p>
+        Use these instructions to turn your daily wallpaper into a native macOS
+        screensaver.
+      </p>
+    </r-cell>
 
-  <r-cell order="-10" span="6" span-s="4" class="intro">
-    <Header />
-    <h1>How to Set Up the Basalt Screensaver</h1>
-    <p>
-      Use these instructions to turn your daily wallpaper into a native macOS screensaver.
-    </p>
-  </r-cell>
+    <!-- Step 1 -->
+    <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
+      <h3>Step 1: Enable Sync in Basalt</h3>
+      <p>
+        Open the Basalt app and go to Settings. Under the Screensaver section,
+        toggle on "Sync wallpaper to screensaver".
+      </p>
+      <div style="margin-top: 1rem;">
+        <CldImage
+          src="01-screensaver-help_ujr6lt"
+          width={740}
+          height={555}
+          alt="Basalt Settings > Screensaver Toggle"
+          crop="fill"
+          style="width:100%; height:auto; border-radius: 4px;"
+        />
+      </div>
+    </r-cell>
 
-  <!-- Step 1 -->
-  <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
-    <h3>Step 1: Enable Sync in Basalt</h3>
-    <p>Open the Basalt app and go to Settings. Under the Screensaver section, toggle on "Sync wallpaper to screensaver".</p>
-    <div style="margin-top: 1rem;">
+    <!-- Step 2 -->
+    <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
+      <h3>Step 2: Locate the Folder</h3>
+      <p>
+        In the same settings section, click the "Reveal in Finder" button. A
+        Finder window will open showing the Screensaver folder. Keep this window
+        open—you'll need it in a moment.
+      </p>
+      <div style="margin-top: 1rem;">
+        <CldImage
+          src="02-screensaver-help_hdprtw"
+          width={740}
+          height={555}
+          alt="Finder Window as Screensaver Folder"
+          crop="fill"
+          style="width:100%; height:auto; border-radius: 4px;"
+        />
+      </div>
+    </r-cell>
+
+    <!-- Step 3 -->
+    <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
+      <h3>Step 3: Access Screensaver Settings</h3>
+      <p>
+        Open <strong>System Settings</strong> and click on <strong
+          >Wallpaper</strong
+        > in the sidebar. Then, click the <strong>Screen Saver</strong> button to
+        view your screensaver formatting options.
+      </p>
+      <div style="margin-top: 1rem;">
+        <CldImage
+          src="03-screensaver-help_ey0ske"
+          width={740}
+          height={555}
+          alt="macOS System Settings > Wallpaper > Screen Saver"
+          crop="fill"
+          style="width:100%; height:auto; border-radius: 4px;"
+        />
+      </div>
+    </r-cell>
+
+    <!-- Step 4 -->
+    <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
+      <h3>Step 4: Choose Source Type</h3>
+      <p>
+        In the settings window, scroll to the bottom and click the <strong
+          >Photos</strong
+        > option.
+      </p>
+      <div style="margin-top: 1rem;">
+        <CldImage
+          src="04-screensaver-help_iwy0z3"
+          width={740}
+          height={555}
+          alt="macOS Screensaver Options > Choose Folder"
+          crop="fill"
+          style="width:100%; height:auto; border-radius: 4px;"
+        />
+      </div>
+    </r-cell>
+
+    <!-- Step 5 -->
+    <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
+      <h3>Step 5: Select the Source Folder</h3>
+      <p>
+        Scroll back to the top and click <strong>Options</strong>. Then select <strong
+          >Choose Folder...</strong
+        > and pick the Screensaver folder you revealed in Step 2.
+      </p>
       <CldImage
-        src="01-screensaver-help_ujr6lt"
-        width={740}
-        height={555}
-        alt="Basalt Settings > Screensaver Toggle"
+        src="05-screensaver-help_yvemdg"
+        width={1200}
+        height={750}
+        alt="Basalt Screensaver Active"
         crop="fill"
-        style="width:100%; height:auto; border-radius: 4px;"
+        style="width:100%; height:auto; border-radius: 4px; margin-bottom: 1rem;"
       />
-    </div>
-  </r-cell>
+    </r-cell>
 
-  <!-- Step 2 -->
-  <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
-    <h3>Step 2: Locate the Folder</h3>
-    <p>In the same settings section, click the "Reveal in Finder" button. A Finder window will open showing the Screensaver folder. Keep this window open—you'll need it in a moment.</p>
-    <div style="margin-top: 1rem;">
-      <CldImage
-        src="02-screensaver-help_hdprtw"
-        width={740}
-        height={555}
-        alt="Finder Window as Screensaver Folder"
-        crop="fill"
-        style="width:100%; height:auto; border-radius: 4px;"
-      />
-    </div>
-  </r-cell>
+    <!-- Conclusion -->
+    <r-cell span="6" span-s="4" span-xs="row" class="conclusion">
+      <h3>All Set!</h3>
 
-  <!-- Step 3 -->
-  <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
-    <h3>Step 3: Access Screensaver Settings</h3>
-    <p>
-      Open <strong>System Settings</strong> and click on <strong>Wallpaper</strong> in the sidebar. Then, click the <strong>Screen Saver</strong> button to view your screensaver formatting options.
-    </p>
-    <div style="margin-top: 1rem;">
-      <CldImage
-        src="03-screensaver-help_ey0ske"
-        width={740}
-        height={555}
-        alt="macOS System Settings > Wallpaper > Screen Saver"
-        crop="fill"
-        style="width:100%; height:auto; border-radius: 4px;"
-      />
-    </div>
-  </r-cell>
-
-  <!-- Step 4 -->
-  <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
-    <h3>Step 4: Choose Source Type</h3>
-    <p>
-      In the settings window, scroll to the bottom and click the <strong>Photos</strong> option.
-    </p>
-     <div style="margin-top: 1rem;">
-     <CldImage
-        src="04-screensaver-help_iwy0z3"
-        width={740}
-        height={555}
-        alt="macOS Screensaver Options > Choose Folder"
-        crop="fill"
-        style="width:100%; height:auto; border-radius: 4px;"
-      />
-    </div>
-  </r-cell>
-
-  <!-- Step 5 -->
-  <r-cell span="6" span-s="4" span-xs="row" style="margin-bottom: 4rem;">
-    <h3>Step 5: Select the Source Folder</h3>
-    <p>
-      Scroll back to the top and click <strong>Options</strong>. Then select <strong>Choose Folder...</strong> and pick the Screensaver folder you revealed in Step 2.
-    </p>
-     <CldImage
-      src="05-screensaver-help_yvemdg"
-      width={1200}
-      height={750}
-      alt="Basalt Screensaver Active"
-      crop="fill"
-      style="width:100%; height:auto; border-radius: 4px; margin-bottom: 1rem;"
-    />
-    
-   
-  </r-cell>
-
-  <!-- Conclusion -->
-  <r-cell span="6" span-s="4" span-xs="row" class="conclusion">
-    <h3>All Set!</h3>
-   
-    <p>Your screensaver is now linked. Whenever Basalt updates your daily wallpaper, your screensaver will automatically update to match.</p>
-    <div style="margin-top: 2rem;">
-      <Button href="/">
-        <Fragment set:html={appleIcon} />
-        Back to Home
-      </Button>
-    </div>
-  </r-cell>
-
-</r-grid>
+      <p>
+        Your screensaver is now linked. Whenever Basalt updates your daily
+        wallpaper, your screensaver will automatically update to match.
+      </p>
+    </r-cell>
+  </r-grid>
 </Layout>

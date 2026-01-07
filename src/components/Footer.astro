@@ -1,0 +1,111 @@
+---
+import basaltFavicon from "../assets/basalt-favicon.svg?raw";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+    <r-grid class="footer-grid" columns="6" columns-s="4" columns-xs="1">
+        <r-cell span="6" span-s="row" span-xs="row">
+            <div class="divider"></div>
+            <div class="footer-content">
+                <div class="brand">
+                    <div class="icon-b">
+                        <Fragment set:html={basaltFavicon} />
+                    </div>
+                    <span class="slogan">Fine art, daily. Hand-picked.</span>
+                </div>
+                <div class="links">
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/support">Support</a>
+                </div>
+            </div>
+        </r-cell>
+    </r-grid>
+</footer>
+
+<style>
+    .site-footer {
+        padding: 0;
+        margin-top: auto;
+    }
+
+    /* Local padding for footer */
+    .footer-grid {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .divider {
+        width: 100%;
+        height: 0;
+        border-top: 1px solid var(--stone-200);
+        margin-bottom: 2rem;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .icon-b {
+        width: 24px;
+        height: 24px;
+        min-width: 24px; /* Prevent shrinking */
+        color: var(--stone-900);
+        display: flex; /* Ensure container behaves */
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-b :global(svg) {
+        width: 100% !important;
+        height: 100% !important;
+        fill: currentColor;
+        display: block;
+    }
+
+    .slogan {
+        color: var(--stone-900);
+        font-size: var(--fs-body-small);
+        font-weight: 500;
+    }
+
+    .links {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .links a {
+        text-decoration: none;
+        color: var(--stone-900);
+        font-size: var(--fs-body-small);
+        transition: opacity 0.2s ease;
+    }
+
+    .links a:hover {
+        opacity: 0.5;
+    }
+
+    @media (max-width: 600px) {
+        .footer-content {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .links {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+</style>
