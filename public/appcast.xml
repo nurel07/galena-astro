@@ -3,6 +3,14 @@
     <channel>
         <title>Basalt</title>
         <item>
+            <title>1.0.2</title>
+            <pubDate>Sat, 10 Jan 2026 13:04:00 +0200</pubDate>
+            <sparkle:version>2</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+            <enclosure url="https://basalt.yevgenglukhov.com/Basalt.zip" length="11281098" type="application/octet-stream" sparkle:edSignature="kXdreS4DNbVJrgr7iMTtv7cqvyCH5jSFdC/2ttLcdRTQ80I5IWFIlRPj4ZLZ7J8SbCRUJTe8YcLC0D2QP0ltDw=="/>
+        </item>
+        <item>
             <title>1.0</title>
             <pubDate>Sun, 04 Jan 2026 11:23:27 +0200</pubDate>
             <sparkle:version>1</sparkle:version>

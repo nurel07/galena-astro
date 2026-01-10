@@ -7,27 +7,27 @@ interface Props {
 
 const { href, class: className, ...rest } = Astro.props;
 
-const Tag = href ? 'a' : 'button';
+const Tag = href ? "a" : "button";
 ---
 
-<Tag 
-  href={href} 
-  class:list={['btn', className]} 
-  type={!href ? 'button' : undefined} 
+<Tag
+  href={href}
+  class:list={["btn", className]}
+  type={!href ? "button" : undefined}
   {...rest}
 >
   <slot />
 </Tag>
 
 <script>
-  const buttons = document.querySelectorAll('.btn') as NodeListOf<HTMLElement>;
-  buttons.forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
+  const buttons = document.querySelectorAll(".btn") as NodeListOf<HTMLElement>;
+  buttons.forEach((btn) => {
+    btn.addEventListener("mouseenter", () => {
       const hue = Math.floor(Math.random() * 360);
-      btn.style.setProperty('--btn-fill', `oklch(0.7 0.153 ${hue})`);
+      btn.style.setProperty("--btn-fill", `oklch(0.7 0.153 ${hue})`);
     });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.removeProperty('--btn-fill');
+    btn.addEventListener("mouseleave", () => {
+      btn.style.removeProperty("--btn-fill");
     });
   });
 </script>
@@ -43,7 +43,7 @@ const Tag = href ? 'a' : 'button';
     border-radius: 4px;
     width: 100%;
     max-width: fit-content;
-    
+
     /* Typography */
     font-family: var(--font-sans);
     font-size: var(--fs-body-medium);
@@ -56,11 +56,13 @@ const Tag = href ? 'a' : 'button';
     /* Colors (Outline Variant Default) */
     /* Uses --btn-fill if set (by hover), else persistent or fallback */
     background: var(--btn-fill, transparent);
-    color: var(--stone-900);
-    border: 1px solid var(--btn-fill, var(--stone-900));
+    color: var(--text-primary);
+    border: 1px solid var(--btn-fill, var(--text-primary));
     outline: none;
-    
+
     /* Transition */
-    transition: background-color 0.1s ease, border-color 0.1s ease;
+    transition:
+      background-color 0.1s ease,
+      border-color 0.1s ease;
   }
 </style>

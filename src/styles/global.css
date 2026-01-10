@@ -1,7 +1,7 @@
 /* Fonts & Colors */
 :root {
     --font-sans: 'Inter', system-ui, sans-serif;
-    --font-serif: 'Source Serif 4', serif;
+    --font-serif: 'Fraunces', serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
     /* Fluid Typography (Min: Mobile, Max: Desktop) */
@@ -12,25 +12,77 @@
     --fs-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
     /* 20px → 24px */
 
-    --fs-body-large: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --fs-body-large: clamp(1.125rem, 1.0739rem + 0.2273vw, 1.25rem);
     /* 16px → 18px */
-    --fs-body-medium: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+    --fs-body-medium: clamp(1rem, 0.9489rem + 0.2273vw, 1.125rem);
     /* 14px → 16px */
     --fs-body-small: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
     /* 12px → 14px */
 
-    /* Stone Palette (OKLCH) */
-    --stone-50: oklch(98.8% 0.004 85);
-    --stone-100: oklch(96.5% 0.006 85);
-    --stone-200: oklch(90.5% 0.007 85);
-    --stone-300: oklch(83.5% 0.007 85);
-    --stone-400: oklch(76.5% 0.007 85);
-    --stone-500: oklch(69.5% 0.007 85);
-    --stone-600: oklch(56.5% 0.007 85);
-    --stone-700: oklch(46.5% 0.007 85);
-    --stone-800: oklch(34.5% 0.007 85);
-    --stone-900: oklch(27.9% 0.009 82);
-    --stone-950: oklch(13.5% 0.008 80);
+    /* Stone Palette (Hex) */
+    --stone-50: #FEFBF6;
+    --stone-100: #F6F3EE;
+    --stone-200: #E6E3DF;
+    --stone-300: #D1CECA;
+    --stone-400: #BDBAB5;
+    --stone-500: #A9A6A2;
+    --stone-600: #86847F;
+    --stone-700: #6C6965;
+    --stone-800: #524F4B;
+    --stone-900: #302E2B;
+    --stone-950: #161411;
+
+    /* Semantic Variables (Light Mode Default) */
+    --bg-primary: var(--stone-50);
+    --bg-secondary: var(--stone-100);
+    --bg-tertiary: var(--stone-200);
+
+    --text-primary: var(--stone-950);
+    --text-secondary: var(--stone-700);
+
+    /* Legacy Mappings to prevent breakage */
+    --bg-page: var(--bg-primary);
+    /* For Layout.astro overrides/fallbacks */
+    --text-link: var(--stone-950);
+    --text-link-hover: #0055ff;
+
+    --border-default: var(--stone-200);
+}
+
+/* Dark mode via system preference */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg-primary: var(--stone-900);
+        --bg-secondary: var(--stone-800);
+        --bg-tertiary: var(--stone-950);
+
+        --text-primary: var(--stone-50);
+        --text-secondary: var(--stone-400);
+
+        /* Legacy Mappings */
+        --bg-page: var(--bg-primary);
+        --text-link: var(--stone-50);
+        --text-link-hover: #4d8bff;
+
+        --border-default: var(--stone-800);
+    }
+}
+
+/* Dark mode via explicit toggle */
+:root[data-theme="dark"] {
+    --bg-primary: var(--stone-900);
+    --bg-secondary: var(--stone-800);
+    --bg-tertiary: var(--stone-950);
+
+    --text-primary: var(--stone-50);
+    --text-secondary: var(--stone-400);
+
+    /* Legacy Mappings */
+    --bg-page: var(--bg-primary);
+    --text-link: var(--stone-50);
+    --text-link-hover: #4d8bff;
+
+    --border-default: var(--stone-800);
 }
 
 /* Global Reset */
@@ -52,8 +104,8 @@ body {
     /* Default to Body Medium */
     letter-spacing: -0.01em;
     margin: 0;
-    color: var(--stone-900);
-    background: var(--page-bg, #ffffff);
+    color: var(--text-primary);
+    background: var(--bg-primary);
     /* Added fallback for page-bg */
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
@@ -69,10 +121,11 @@ a {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
+    transition: color 0.1s ease;
 }
 
 a:hover {
-    color: #0055ff;
+    color: var(--link-hover-color, var(--text-link-hover));
 }
 
 /* Typography Headings */
@@ -80,9 +133,10 @@ h1,
 h2,
 h3 {
     font-family: var(--font-serif);
-    font-weight: 600;
+    font-weight: 500;
+    font-variation-settings: "WONK" 1;
     margin: 0;
-    color: var(--stone-900);
+    color: var(--text-primary);
 }
 
 h1 {
@@ -134,7 +188,7 @@ ul {
     max-width: 1246px;
     /* 1200 + padding */
     margin: 0 auto;
-    background: #ffffff;
+    background: var(--bg-primary);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -144,7 +198,7 @@ ul {
 
 /* Links */
 a {
-    color: var(--stone-900);
+    color: var(--text-link);
 }
 
 /* Grid System */
@@ -312,16 +366,16 @@ r-cell[order="-1"] {
 .menu a {
     display: block;
     text-decoration: none;
-    color: var(--stone-600);
+    color: var(--text-secondary);
     margin-bottom: 0.25rem;
 }
 
 .menu a:hover {
-    color: var(--stone-900);
+    color: var(--text-primary);
 }
 
 .menu .focus1 a:first-child {
-    color: var(--stone-900);
+    color: var(--text-primary);
 }
 
 .intro p {
@@ -329,7 +383,7 @@ r-cell[order="-1"] {
     margin-bottom: 2rem;
     font-size: 1.2rem;
     font-weight: 500;
-    color: var(--stone-900);
+    color: var(--text-primary);
 }
 
 .bio img {
@@ -337,13 +391,13 @@ r-cell[order="-1"] {
     height: auto;
     border-radius: 4px;
     margin-bottom: 1rem;
-    background: #eee;
+    background: var(--bg-secondary);
 }
 
 .link-list a {
     display: inline-block;
     margin-right: 1rem;
-    color: var(--stone-600);
+    color: var(--text-secondary);
     text-decoration: none;
     font-size: 0.9rem;
 }
@@ -354,11 +408,12 @@ r-cell[order="-1"] {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-size: 0.8rem;
-    color: var(--stone-500);
+    color: var(--text-secondary);
+    /* Mapped to secondary */
 }
 
 .tidbit p {
     font-size: 0.9rem;
-    color: var(--stone-700);
+    color: var(--text-secondary);
     margin-top: 0;
 }

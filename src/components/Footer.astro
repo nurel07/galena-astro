@@ -1,5 +1,7 @@
 ---
 import basaltFavicon from "../assets/basalt-favicon.svg?raw";
+import sunIcon from "../assets/sun-bright.svg?raw";
+import moonIcon from "../assets/moon.svg?raw";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -18,11 +20,54 @@ const currentYear = new Date().getFullYear();
                 <div class="links">
                     <a href="/privacy">Privacy Policy</a>
                     <a href="/support">Support</a>
+                    <button
+                        id="theme-toggle"
+                        class="theme-toggle"
+                        aria-label="Toggle theme"
+                    >
+                        <span class="icon-sun"
+                            ><Fragment set:html={sunIcon} /></span
+                        >
+                        <span class="icon-moon"
+                            ><Fragment set:html={moonIcon} /></span
+                        >
+                    </button>
                 </div>
             </div>
         </r-cell>
     </r-grid>
 </footer>
+
+<script is:inline>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById("theme-toggle");
+
+    // Get current theme from localStorage or system preference
+    function getTheme() {
+        const stored = localStorage.getItem("theme");
+        if (stored) return stored;
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    }
+
+    // Apply theme to document
+    function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+    }
+
+    // Initialize theme on page load
+    applyTheme(getTheme());
+
+    // Toggle theme on button click
+    themeToggle?.addEventListener("click", () => {
+        const current =
+            document.documentElement.getAttribute("data-theme") || getTheme();
+        const next = current === "dark" ? "light" : "dark";
+        applyTheme(next);
+    });
+</script>
 
 <style>
     .site-footer {
@@ -39,7 +84,7 @@ const currentYear = new Date().getFullYear();
     .divider {
         width: 100%;
         height: 0;
-        border-top: 1px solid var(--stone-200);
+        border-top: 1px solid var(--border-default);
         margin-bottom: 2rem;
     }
 
@@ -61,7 +106,7 @@ const currentYear = new Date().getFullYear();
         width: 24px;
         height: 24px;
         min-width: 24px; /* Prevent shrinking */
-        color: var(--stone-900);
+        color: var(--text-primary);
         display: flex; /* Ensure container behaves */
         align-items: center;
         justify-content: center;
@@ -75,25 +120,89 @@ const currentYear = new Date().getFullYear();
     }
 
     .slogan {
-        color: var(--stone-900);
+        color: var(--text-primary);
         font-size: var(--fs-body-small);
         font-weight: 500;
     }
 
     .links {
         display: flex;
+        align-items: center;
         gap: 2rem;
     }
 
     .links a {
         text-decoration: none;
-        color: var(--stone-900);
+        color: var(--text-primary);
         font-size: var(--fs-body-small);
         transition: opacity 0.2s ease;
     }
 
     .links a:hover {
         opacity: 0.5;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+        background: none;
+        border: none;
+        outline: none;
+        padding: 0.25rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        color: var(--text-primary);
+        transition: opacity 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+        opacity: 0.5;
+    }
+
+    .theme-toggle :global(svg) {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+    }
+
+    .theme-toggle :global(svg path) {
+        fill: currentColor;
+    }
+
+    /* Icon container spans */
+    .icon-sun,
+    .icon-moon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Default: light mode - show sun, hide moon */
+    .icon-moon {
+        display: none;
+    }
+
+    /* Dark mode via data-theme attribute */
+    :global([data-theme="dark"]) .icon-sun {
+        display: none;
+    }
+    :global([data-theme="dark"]) .icon-moon {
+        display: flex;
+    }
+
+    /* Dark mode via system preference (when no explicit data-theme is set) */
+    @media (prefers-color-scheme: dark) {
+        :global(:root:not([data-theme])) .icon-sun,
+        :global([data-theme="dark"]) .icon-sun {
+            display: none;
+        }
+        :global(:root:not([data-theme])) .icon-moon,
+        :global([data-theme="dark"]) .icon-moon {
+            display: flex;
+        }
     }
 
     @media (max-width: 600px) {

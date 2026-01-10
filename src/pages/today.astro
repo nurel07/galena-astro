@@ -45,7 +45,7 @@ const displayData = wallpaper || {
 const imageBg =
   displayData.dominantColors && displayData.dominantColors.length > 0
     ? displayData.dominantColors[0]
-    : "var(--stone-200)";
+    : "var(--bg-tertiary)";
 ---
 
 <Layout title={`Today's Art: ${displayData.name}`} backgroundColor={imageBg}>
@@ -83,11 +83,11 @@ const imageBg =
       </div>
 
       <!-- Typography -->
-      <h1>{displayData.artist}</h1>
+      <h1>{displayData.name}</h1>
       <h3
-        style="font-weight: 500; font-family: var(--font-sans); color: var(--stone-600); margin-top: 0.5rem; margin-bottom: 2rem;"
+        style="font-weight: 500; font-family: var(--font-sans); color: var(--text-secondary); margin-top: 0.5rem; margin-bottom: 2rem;"
       >
-        {displayData.name}, {displayData.creationDate}
+        {displayData.artist}, {displayData.creationDate}
       </h3>
 
       <p class="text-medium" style="margin-bottom: 10rem;">
@@ -103,7 +103,7 @@ const imageBg =
 
         <p
           class="text-small"
-          style="margin-top: 1.5rem; color: var(--stone-500);"
+          style="margin-top: 1.5rem; color: var(--text-secondary);"
         >
           All artworks featured in Basalt are sourced from the public domain
           (CC0).
@@ -144,7 +144,7 @@ const imageBg =
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--stone-500);
+    color: var(--text-secondary);
     font-size: var(--fs-h3);
     border-radius: 0 0 4px 4px;
   }
@@ -154,7 +154,7 @@ const imageBg =
     align-items: center;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-    color: var(--stone-900);
+    color: var(--text-primary);
   }
 
   .icon-b {
