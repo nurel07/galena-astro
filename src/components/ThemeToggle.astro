@@ -1,0 +1,205 @@
+---
+import sunIcon from "../assets/sun-bright.svg?raw";
+import moonIcon from "../assets/moon.svg?raw";
+---
+
+<button
+    class="theme-toggle-btn"
+    title="Toggle dark mode"
+    aria-label="Toggle dark mode"
+    type="button"
+    role="switch"
+    aria-checked="false"
+>
+    <div class="theme-toggle-track">
+        <div class="theme-toggle-thumb">
+            <div class="theme-toggle-icon sun">
+                <Fragment set:html={sunIcon} />
+            </div>
+            <div class="theme-toggle-icon moon">
+                <Fragment set:html={moonIcon} />
+            </div>
+        </div>
+    </div>
+</button>
+
+<style>
+    .theme-toggle-btn {
+        cursor: pointer;
+        background: 0 0;
+        border: none;
+        padding: 0;
+        margin: 0;
+        -webkit-tap-highlight-color: transparent;
+        border-radius: 20px;
+        transition: opacity 0.2s ease;
+    }
+
+    .theme-toggle-btn:hover {
+        opacity: 0.8;
+    }
+
+    .theme-toggle-track {
+        position: relative;
+        width: 40px;
+        height: 24px;
+        background-color: transparent;
+        border: 1px solid var(--border-default);
+        border-radius: 26px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        padding: 2px;
+        box-sizing: border-box;
+    }
+
+    :global([data-theme="dark"]) .theme-toggle-track {
+        border-color: var(--stone-600);
+        background-color: var(--bg-primary);
+    }
+
+    .theme-toggle-thumb {
+        position: absolute;
+        /* top: 2px; */
+        left: 2px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 2;
+    }
+
+    .theme-toggle-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+            opacity 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    /* Target the injected SVG */
+    .theme-toggle-icon :global(svg) {
+        width: 12px;
+        height: 12px;
+        fill: currentColor;
+    }
+
+    /* Colors */
+    .theme-toggle-icon.sun {
+        color: #115e59; /* Tailwind teal-800 approx */
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .theme-toggle-icon.moon {
+        color: var(--stone-100);
+        opacity: 0;
+        transform: scale(0.5) rotate(-90deg);
+    }
+
+    /* Dark Mode State */
+    :global([data-theme="dark"]) .theme-toggle-thumb {
+        transform: translateX(18px);
+    }
+
+    :global([data-theme="dark"]) .theme-toggle-icon.sun {
+        opacity: 0;
+        transform: scale(0.5) rotate(90deg);
+    }
+
+    :global([data-theme="dark"]) .theme-toggle-icon.moon {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+
+    :global([data-theme="dark"]) .theme-toggle-icon.moon {
+        color: var(--stone-50);
+    }
+</style>
+
+<script>
+    // Theme toggle functionality
+    function initThemeToggles() {
+        const toggles = document.querySelectorAll(
+            ".theme-toggle-btn",
+        ) as NodeListOf<HTMLElement>;
+
+        // Get current theme from localStorage or system preference
+        function getTheme() {
+            if (
+                typeof localStorage !== "undefined" &&
+                localStorage.getItem("theme")
+            ) {
+                return localStorage.getItem("theme");
+            }
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                return "dark";
+            }
+            return "light";
+        }
+
+        // Apply theme to document and update all toggles
+        function setTheme(theme: string) {
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+            const isDark = theme === "dark";
+
+            // Update all toggles on the page
+            toggles.forEach((t) => {
+                t.setAttribute("aria-checked", isDark.toString());
+            });
+        }
+
+        // Initialize state
+        const initialTheme = getTheme() || "light";
+        // Ensure UI matches state on load (without setting storage if not needed, but safe to set attrib)
+        document.documentElement.setAttribute("data-theme", initialTheme);
+        toggles.forEach((t) => {
+            t.setAttribute(
+                "aria-checked",
+                (initialTheme === "dark").toString(),
+            );
+        });
+
+        // Add click listeners
+        toggles.forEach((toggle) => {
+            // Remove existing listeners to avoid duplicates if re-initialized (though Astro scripts run once per page load usually)
+            // Ideally we just add new ones.
+            toggle.addEventListener("click", () => {
+                const currentTheme = getTheme();
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                setTheme(newTheme);
+            });
+        });
+
+        // Listen for hotkey D
+        window.addEventListener("keydown", (e) => {
+            if (
+                document.activeElement?.tagName === "INPUT" ||
+                document.activeElement?.tagName === "TEXTAREA"
+            ) {
+                return;
+            }
+            if ((e.key === "d" || e.key === "D") && !e.ctrlKey && !e.metaKey) {
+                const currentTheme = getTheme();
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                setTheme(newTheme);
+            }
+        });
+    }
+
+    // Run initialization
+    initThemeToggles();
+
+    // Re-run on view transitions if needed (Astro default)
+    document.addEventListener("astro:page-load", initThemeToggles);
+</script>
