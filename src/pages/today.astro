@@ -45,10 +45,30 @@ const displayData = wallpaper || {
 const imageBg =
   displayData.dominantColors && displayData.dominantColors.length > 0
     ? displayData.dominantColors[0]
-    : "var(--bg-tertiary)";
+    : "#E6E3DF"; // Fallback to a stone-like hex
+
+// --- Hex to OKLCH Helpers ---
+import { hexToOklch } from "../utils/color";
+
+// Convert
+const [L, C, h] = hexToOklch(imageBg);
+
+// Dynamic CSS Variables
+const dynamicH = h.toFixed(2);
+const dynamicC = C.toFixed(4);
 ---
 
-<Layout title={`Today's Art: ${displayData.name}`} backgroundColor={imageBg}>
+<Layout
+  title={`Today's Art: ${displayData.name}`}
+  backgroundColor="var(--bg-dynamic)"
+>
+  <Fragment
+    set:html={`<style>
+    :root[data-theme="dark"] {
+      --bg-dynamic: oklch(0.2 0.05 ${dynamicH}) !important;
+    }
+  </style>`}
+  />
   <!-- Hero Section (Outside Grid, Max 1248px) -->
   <div class="hero-wrapper">
     {
@@ -103,14 +123,6 @@ const imageBg =
           <Fragment set:html={appleIcon} />
           Download Basalt for Mac
         </Button>
-
-        <p
-          class="text-small"
-          style="margin-top: 1.5rem; color: var(--text-secondary);"
-        >
-          All artworks featured in Basalt are sourced from the public domain
-          (CC0).
-        </p>
       </div>
     </r-cell>
   </r-grid>
@@ -122,16 +134,20 @@ const imageBg =
     width: 100%;
     max-width: 1248px;
     margin: 0 auto;
-    /* Constrain image width inside the white card */
-    /* Optional: margin-top if needed, otherwise it's flush top */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .hero-img {
-    width: 100%;
+    width: auto;
     height: auto;
-    /* max-height removed to let image dictate height */
+    max-width: 100%;
+    max-height: min(860px, calc(100vh - 200px));
+    object-fit: contain;
     display: block;
-    background-color: var(--imageBg);
+    /* background-color: var(--imageBg); Remove background from image itself to let page bg show through padding */
   }
 
   /* Override grid top padding to bring text closer to image */
@@ -141,15 +157,14 @@ const imageBg =
 
   .placeholder-image {
     width: 100%;
-    height: 60vh;
-    max-height: 800px;
+    height: 100%;
     background-color: var(--imageBg);
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--text-secondary);
     font-size: var(--fs-h3);
-    border-radius: 0 0 4px 4px;
+    border-radius: 4px;
   }
 
   .label {
@@ -171,3 +186,13 @@ const imageBg =
     fill: currentColor;
   }
 </style>
+
+<script>
+  import mediumZoom from "medium-zoom";
+
+  mediumZoom(".hero-img", {
+    margin: 24,
+    background: "var(--bg-primary)", // Use primary background for zoom overlay
+    scrollOffset: 0,
+  });
+</script>

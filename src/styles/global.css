@@ -19,21 +19,26 @@
     --fs-body-small: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
     /* 12px → 14px */
 
-    /* Stone Palette (Hex) */
-    --stone-50: #FEFBF6;
-    --stone-100: #F6F3EE;
-    --stone-200: #E6E3DF;
-    --stone-300: #D1CECA;
-    --stone-400: #BDBAB5;
-    --stone-500: #A9A6A2;
-    --stone-600: #86847F;
-    --stone-700: #6C6965;
-    --stone-800: #524F4B;
-    --stone-900: #302E2B;
-    --stone-950: #161411;
+    /* Stone Palette (OKLCH) */
+    --stone-h: 60;
+    --stone-c: 0.02;
+
+    --stone-50: oklch(98% var(--stone-c) var(--stone-h));
+    --stone-100: oklch(95% var(--stone-c) var(--stone-h));
+    --stone-200: oklch(90% var(--stone-c) var(--stone-h));
+    --stone-300: oklch(80% var(--stone-c) var(--stone-h));
+    --stone-400: oklch(70% var(--stone-c) var(--stone-h));
+    --stone-500: oklch(60% var(--stone-c) var(--stone-h));
+    --stone-600: oklch(50% var(--stone-c) var(--stone-h));
+    --stone-700: oklch(40% var(--stone-c) var(--stone-h));
+    --stone-800: oklch(30% var(--stone-c) var(--stone-h));
+    --stone-900: oklch(20% var(--stone-c) var(--stone-h));
+    --stone-950: oklch(10% var(--stone-c) var(--stone-h));
 
     /* Semantic Variables (Light Mode Default) */
+    --bg-dynamic: var(--stone-50);
     --bg-primary: var(--stone-50);
+    /* Explicitly Stone-50, ignoring dynamic overrides */
     --bg-secondary: var(--stone-100);
     --bg-tertiary: var(--stone-200);
 
@@ -50,27 +55,12 @@
 }
 
 /* Dark mode via system preference */
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --bg-primary: var(--stone-900);
-        --bg-secondary: var(--stone-800);
-        --bg-tertiary: var(--stone-950);
-
-        --text-primary: var(--stone-50);
-        --text-secondary: var(--stone-400);
-
-        /* Legacy Mappings */
-        --bg-page: var(--bg-primary);
-        --text-link: var(--stone-50);
-        --text-link-hover: #4d8bff;
-
-        --border-default: var(--stone-800);
-    }
-}
+/* Dark mode via system preference handles by JS in Layout (fallback removed) */
 
 /* Dark mode via explicit toggle */
 :root[data-theme="dark"] {
-    --bg-primary: var(--stone-900);
+    --bg-dynamic: var(--stone-900);
+    --bg-primary: var(--bg-dynamic);
     --bg-secondary: var(--stone-800);
     --bg-tertiary: var(--stone-950);
 
