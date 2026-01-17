@@ -33,6 +33,20 @@ const { title = "Astro Basics", backgroundColor, footerSpan } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- Open Graph / Social -->
+		<meta property="og:title" content={title} />
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:image"
+			content="https://assets.yevgenglukhov.com/images/basalt-og-image.jpg"
+		/>
+		<meta property="og:url" content="https://basalt.yevgenglukhov.com" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta
+			name="twitter:image"
+			content="https://assets.yevgenglukhov.com/images/basalt-og-image.jpg"
+		/>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
