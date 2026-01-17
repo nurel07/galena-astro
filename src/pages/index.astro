@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import appleIcon from "../assets/apple-icon.svg?raw";
-import basaltFavicon from "../assets/basalt-favicon.svg?raw";
 
 interface Wallpaper {
   id: string;
@@ -69,130 +68,639 @@ const dynamicC = C.toFixed(4);
     }
   </style>`}
   />
-  <!-- Hero Section (Outside Grid, Max 1248px) -->
-  <div class="hero-wrapper">
-    {
-      displayData.url ? (
-        <img src={displayData.url} alt={displayData.name} class="hero-img" />
-      ) : (
-        <div class="placeholder-image">
-          <span>Art Placeholder</span>
-        </div>
-      )
-    }
-  </div>
-
   <r-grid
     class="main content-grid page-grid"
     columns="6"
     columns-s="4"
     columns-xs="1"
   >
-    <!-- Content Section -->
-    <r-cell span="6" span-s="row" span-xs="row" class="content">
-      <!-- Label -->
-      <div class="label">
-        <div class="icon-b">
-          <Fragment set:html={basaltFavicon} />
-        </div>
-        <span
-          class="text-small"
-          style="font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;"
-          >Today's Art</span
-        >
+    <!-- Image Section (Span 1-4) -->
+    <r-cell span="1-5" span-s="row" span-xs="row">
+      <div class="hero-wrapper">
+        {
+          displayData.url ? (
+            <img
+              src={displayData.url}
+              alt={displayData.name}
+              class="hero-img"
+            />
+          ) : (
+            <div class="placeholder-image">
+              <span>Art Placeholder</span>
+            </div>
+          )
+        }
       </div>
 
-      <!-- Typography -->
-      <h1>{displayData.name}</h1>
-      <h3
-        style="font-weight: 500; font-family: var(--font-sans); color: var(--text-secondary); margin-top: 0.5rem; margin-bottom: 2rem;"
-      >
-        {displayData.artist}, {displayData.creationDate}
-      </h3>
+      <!-- Mobile-only Today's Art (under image) -->
+      <a href="/today" class="today-link today-link-mobile">
+        <div class="basalt-icon">
+          <svg
+            width="23"
+            height="23"
+            viewBox="0 0 23 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g opacity="0.8">
+              <rect
+                x="0.736751"
+                y="0.736751"
+                width="20.629"
+                height="20.629"
+                rx="5.15726"
+                stroke="currentColor"
+                stroke-width="1.4735"></rect>
+              <path
+                d="M5.82617 4.70215H13.4466C14.1184 4.70215 14.7167 4.8491 15.2415 5.143C15.7664 5.4369 16.1757 5.84627 16.4696 6.37109C16.7635 6.89592 16.9105 7.49422 16.9105 8.16599V8.27621C16.9105 8.92699 16.7478 9.48855 16.4224 9.9609C16.097 10.4332 15.6509 10.7849 15.0841 11.0158V11.1418C15.6614 11.3622 16.1075 11.6981 16.4224 12.1494C16.7478 12.5903 16.9105 13.1203 16.9105 13.7396V13.8499C16.9105 14.5111 16.7635 15.1042 16.4696 15.629C16.1757 16.1538 15.7664 16.5632 15.2415 16.8571C14.7167 17.151 14.1184 17.298 13.4466 17.298H5.82617V4.70215ZM12.4547 14.3379C12.6437 14.3379 12.7959 14.2802 12.9113 14.1647C13.0373 14.0388 13.1003 13.8813 13.1003 13.6924V13.0311C13.1003 12.8422 13.0373 12.69 12.9113 12.5745C12.7959 12.4486 12.6437 12.3856 12.4547 12.3856H9.60491V14.3379H12.4547ZM12.4547 9.5043C12.6437 9.5043 12.7959 9.44657 12.9113 9.33111C13.0373 9.20515 13.1003 9.0477 13.1003 8.85876V8.32344C13.1003 8.13451 13.0373 7.98231 12.9113 7.86684C12.7959 7.74089 12.6437 7.67791 12.4547 7.67791H9.60491V9.5043H12.4547Z"
+                fill="currentColor"></path>
+            </g>
+          </svg>
+        </div>
+        <p class="today-text text-small">
+          <span class="today-label">Today's Art: </span>
+          <span class="today-name"> {displayData.name},</span>
+          <span class="today-meta">
+            {displayData.artist}, {displayData.creationDate}</span
+          >
+        </p>
+      </a>
 
-      <p class="text-medium" style="margin-bottom: 10rem;">
-        {displayData.description}
-      </p>
+      <div style="margin-top: 3rem;">
+        <h1 style=" font-size: clamp(2rem, 1.5909rem + 1.8182vw, 3rem);">
+          <span style="font-weight: 400;"
+            >Hand-picked, display-worthy<br class="desktop-only" />
+            <del>wallpaper</del> art to your Mac every morning.</span
+          >
+          <br class="desktop-only" />
+          <span style="font-weight: 700; font-style: italic;"
+            >No algorithms. Just taste.</span
+          >
+        </h1>
 
-      <!-- Action Base -->
-      <div>
-        <Button
-          href="https://apps.apple.com/us/app/basalt-curated-wallpapers/id6757328187?mt=12"
-          target="_blank"
-        >
-          <Fragment set:html={appleIcon} />
-          Download Basalt for Mac
-        </Button>
+        <div style="margin-top: 4rem;">
+          <Button
+            href="https://apps.apple.com/us/app/basalt-curated-wallpapers/id6757328187?mt=12"
+            target="_blank"
+          >
+            <Fragment set:html={appleIcon} />
+            Download Basalt for Mac
+          </Button>
+          <p
+            class="text-small"
+            style="margin-top: 0.75rem; color: var(--text-secondary);"
+          >
+            Free · No signup
+          </p>
+        </div>
       </div>
     </r-cell>
+
+    <!-- Content Section (Span 5-6) -->
+    <r-cell span="6-6" span-s="row" span-xs="row" class="content">
+      <a href="/today" class="today-link">
+        <!-- Basalt Icon -->
+        <div class="basalt-icon">
+          <svg
+            width="23"
+            height="23"
+            viewBox="0 0 23 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g opacity="0.8">
+              <rect
+                x="0.736751"
+                y="0.736751"
+                width="20.629"
+                height="20.629"
+                rx="5.15726"
+                stroke="currentColor"
+                stroke-width="1.4735"></rect>
+              <path
+                d="M5.82617 4.70215H13.4466C14.1184 4.70215 14.7167 4.8491 15.2415 5.143C15.7664 5.4369 16.1757 5.84627 16.4696 6.37109C16.7635 6.89592 16.9105 7.49422 16.9105 8.16599V8.27621C16.9105 8.92699 16.7478 9.48855 16.4224 9.9609C16.097 10.4332 15.6509 10.7849 15.0841 11.0158V11.1418C15.6614 11.3622 16.1075 11.6981 16.4224 12.1494C16.7478 12.5903 16.9105 13.1203 16.9105 13.7396V13.8499C16.9105 14.5111 16.7635 15.1042 16.4696 15.629C16.1757 16.1538 15.7664 16.5632 15.2415 16.8571C14.7167 17.151 14.1184 17.298 13.4466 17.298H5.82617V4.70215ZM12.4547 14.3379C12.6437 14.3379 12.7959 14.2802 12.9113 14.1647C13.0373 14.0388 13.1003 13.8813 13.1003 13.6924V13.0311C13.1003 12.8422 13.0373 12.69 12.9113 12.5745C12.7959 12.4486 12.6437 12.3856 12.4547 12.3856H9.60491V14.3379H12.4547ZM12.4547 9.5043C12.6437 9.5043 12.7959 9.44657 12.9113 9.33111C13.0373 9.20515 13.1003 9.0477 13.1003 8.85876V8.32344C13.1003 8.13451 13.0373 7.98231 12.9113 7.86684C12.7959 7.74089 12.6437 7.67791 12.4547 7.67791H9.60491V9.5043H12.4547Z"
+                fill="currentColor"></path>
+            </g>
+          </svg>
+        </div>
+
+        <p class="today-text text-small">
+          <span class="today-label">Today's Art:</span>
+          <span class="today-name">{displayData.name},</span>
+          <span class="today-meta"
+            >{displayData.artist}, {displayData.creationDate}</span
+          >
+        </p>
+      </a>
+    </r-cell>
+
+    <!-- Features Section 1 -->
+    <r-cell span="1-2" span-s="row" span-xs="row" class="feature-cell ft-text">
+      <div class="features-text">
+        <h2 style="margin-bottom: 1.5rem;">Actually good art</h2>
+        <p class="text-medium">
+          Every image, picked by hand. No noise. No filler. Just art that
+          actually looks good.
+        </p>
+      </div>
+    </r-cell>
+
+    <r-cell span="3-6" span-s="row" span-xs="row" class="feature-cell ft-media">
+      <img
+        class="feature-media"
+        src="https://assets.yevgenglukhov.com/images/quickstart-01-2.jpg"
+        alt="Hand-picked art for your Mac"
+      />
+    </r-cell>
+    <!-- Features Section 3: Human & AI -->
+    <r-cell span="1-2" span-s="row" span-xs="row" class="feature-cell ft-text">
+      <div class="features-text">
+        <h2 style="margin-bottom: 1.5rem;">Human & AI</h2>
+        <p class="text-medium">
+          Classic masterworks or AI-generated art. Mix them, switch between, or
+          pick a side.
+        </p>
+
+        <!-- Toggle Switch -->
+        <div
+          class="toggle-container"
+          style="margin-top: 1rem; margin-bottom: 1rem;"
+        >
+          <div id="toggle-indicator" class="toggle-indicator" style="width: 0;">
+          </div>
+          <button id="toggle-human" class="toggle-btn active">Human</button>
+          <button id="toggle-ai" class="toggle-btn">AI</button>
+        </div>
+      </div>
+    </r-cell>
+
+    <r-cell span="3-6" span-s="row" span-xs="row" class="feature-cell ft-media">
+      <div class="carousel-container">
+        <img
+          id="carousel-image"
+          class="feature-media carousel-image"
+          src="https://assets.yevgenglukhov.com/images/02-website-img-human-03.jpg"
+          alt="Art preview"
+        />
+      </div>
+    </r-cell>
+
+    <!-- Features Section 2 -->
+    <r-cell span="1-2" span-s="row" span-xs="row" class="feature-cell ft-text">
+      <div class="features-text">
+        <h2 style="margin-bottom: 1.5rem;">Something new, daily</h2>
+        <p class="text-medium">
+          Your wallpaper changes every morning. Wake up to something new. Or
+          skip ahead — Surprise Me grabs a random pick from the vault.
+        </p>
+
+        <!-- Surprise Me Button -->
+        <div style="margin-top: 2rem; margin-bottom: 1rem;">
+          <button id="surprise-btn" class="surprise-btn">🎲 Surprise Me</button>
+        </div>
+      </div>
+    </r-cell>
+
+    <r-cell span="3-6" span-s="row" span-xs="row" class="feature-cell ft-media">
+      <img
+        id="surprise-image"
+        class="feature-media surprise-image"
+        src="https://assets.yevgenglukhov.com/images/03-random-human-02.jpg"
+        alt="Random art preview"
+      />
+    </r-cell>
   </r-grid>
+
+  <style define:vars={{ imageBg }}>
+    .hero-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .hero-img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: min(860px, calc(100vh - 200px));
+      object-fit: contain;
+      display: block;
+      border-radius: 4px;
+    }
+
+    /* Override grid top padding to bring text closer to image */
+    .content-grid {
+      padding-top: 2rem;
+    }
+
+    .placeholder-image {
+      width: 100%;
+      height: 100%;
+      background-color: var(--imageBg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-secondary);
+      font-size: var(--fs-h3);
+      border-radius: 4px;
+    }
+
+    .today-link {
+      display: block;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: opacity 0.2s ease;
+    }
+
+    .today-link:hover {
+      opacity: 0.7;
+    }
+
+    .basalt-icon {
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+    }
+
+    .basalt-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .today-text {
+      margin: 0;
+    }
+
+    .today-label {
+      font-style: italic;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .today-name {
+      font-weight: 600;
+      display: block;
+    }
+
+    .today-meta {
+      color: var(--text-secondary);
+    }
+
+    /* Mobile-only today link - hidden on desktop */
+    .today-link-mobile {
+      display: none;
+    }
+
+    /* Mobile: inline layout */
+    @media (max-width: 900px) {
+      /* Show mobile version, hide desktop version */
+      .today-link-mobile {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+      }
+
+      .content .today-link {
+        display: none;
+      }
+
+      .basalt-icon {
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+
+      .today-text {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.2rem;
+        align-items: center;
+      }
+
+      .today-label,
+      .today-name {
+        display: inline;
+        margin-bottom: 0;
+      }
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .icon-b {
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon-b :global(svg) {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .apple-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Features Section */
+    .feature-cell {
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 900px) {
+      .feature-cell.ft-text {
+        /* Large gap between sections */
+        margin-top: 3rem;
+      }
+      .feature-cell.ft-media {
+        /* Tiny gap between text and image (counteracting 1rem grid gap) */
+        margin-top: -0.5rem;
+      }
+    }
+
+    .media-placeholder {
+      display: none; /* Hide placeholder rules, or keep as fallback if needed */
+    }
+
+    .feature-video {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+      background-color: var(--bg-secondary);
+      aspect-ratio: 1.6;
+      object-fit: cover;
+    }
+
+    .feature-media {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+      aspect-ratio: 1.6;
+      object-fit: cover;
+    }
+
+    /* Toggle Switch Styles */
+    .toggle-container {
+      display: inline-flex;
+      position: relative;
+      background: transparent;
+      border: 1px solid var(--text-secondary);
+      border-radius: 9999px;
+      padding: 0;
+      gap: 0;
+    }
+
+    :global([data-theme="dark"]) .toggle-container {
+      border-color: var(--stone-600);
+    }
+
+    .toggle-indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: var(--text-primary);
+      border-radius: 9999px;
+      transition:
+        left 0.4s cubic-bezier(0.34, 1.2, 0.64, 1),
+        width 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+      z-index: 0;
+    }
+
+    .toggle-btn {
+      position: relative;
+      z-index: 1;
+      padding: 0.5rem 1.25rem;
+      border: none;
+      border-radius: 9999px;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-body-medium);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .toggle-btn.active {
+      color: var(--bg-primary);
+    }
+
+    .toggle-btn:hover:not(.active) {
+      color: var(--text-primary);
+    }
+
+    .carousel-container {
+      position: relative;
+    }
+
+    .carousel-image {
+      transition: opacity 0.3s ease;
+    }
+
+    .carousel-image.fading {
+      opacity: 0.5;
+    }
+
+    /* Surprise Me Button */
+    .surprise-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--text-secondary);
+      border-radius: 9999px;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: var(--fs-body-medium);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    :global([data-theme="dark"]) .surprise-btn {
+      border-color: var(--stone-600);
+    }
+
+    .surprise-btn:hover {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+    }
+
+    .surprise-image {
+      transition: opacity 0.3s ease;
+    }
+
+    .surprise-image.fading {
+      opacity: 0.5;
+    }
+
+    /* Medium-zoom z-index */
+    :global(.medium-zoom-overlay),
+    :global(.medium-zoom-image--opened) {
+      z-index: 9999;
+    }
+  </style>
+
+  <script>
+    import mediumZoom from "medium-zoom";
+
+    mediumZoom(".hero-img, .feature-media, .carousel-image, .surprise-image", {
+      margin: 24,
+      background: "var(--bg-primary)",
+      scrollOffset: 0,
+    });
+
+    // Human/AI Toggle Carousel
+    document.addEventListener("DOMContentLoaded", () => {
+      const humanBtn = document.getElementById("toggle-human");
+      const aiBtn = document.getElementById("toggle-ai");
+      const carouselImg = document.getElementById(
+        "carousel-image",
+      ) as HTMLImageElement;
+      const indicator = document.getElementById("toggle-indicator");
+
+      if (!humanBtn || !aiBtn || !carouselImg || !indicator) return;
+
+      const humanImages = [
+        "https://assets.yevgenglukhov.com/images/02-website-img-human-03.jpg",
+        "https://assets.yevgenglukhov.com/images/02-website-img-human-04.jpg",
+      ];
+
+      const aiImages = [
+        "https://assets.yevgenglukhov.com/images/02-website-img-ai-01.jpg",
+        "https://assets.yevgenglukhov.com/images/02-website-img-ai-02.jpg",
+      ];
+
+      let currentMode: "human" | "ai" = "human";
+      let autoToggleInterval: ReturnType<typeof setInterval>;
+
+      function getRandomImage(images: string[]) {
+        return images[Math.floor(Math.random() * images.length)];
+      }
+
+      function updateIndicator(activeBtn: HTMLElement) {
+        const isAI = activeBtn.id === "toggle-ai";
+        const container = activeBtn.closest(".toggle-container") as HTMLElement;
+
+        indicator.style.width = `${activeBtn.offsetWidth}px`;
+
+        if (isAI) {
+          // AI: position from the right edge (container width - button width)
+          const leftPos = container.clientWidth - activeBtn.offsetWidth;
+          indicator.style.left = `${leftPos}px`;
+        } else {
+          // Human: position at left edge
+          indicator.style.left = "0px";
+        }
+      }
+
+      function switchMode(mode: "human" | "ai") {
+        currentMode = mode;
+
+        // Update button states
+        humanBtn.classList.toggle("active", mode === "human");
+        aiBtn.classList.toggle("active", mode === "ai");
+
+        // Move and resize the sliding indicator
+        const activeBtn = mode === "human" ? humanBtn : aiBtn;
+        updateIndicator(activeBtn);
+
+        const images = mode === "human" ? humanImages : aiImages;
+
+        carouselImg.classList.add("fading");
+        setTimeout(() => {
+          carouselImg.src = getRandomImage(images);
+          carouselImg.classList.remove("fading");
+        }, 150);
+      }
+
+      function autoToggle() {
+        const nextMode = currentMode === "human" ? "ai" : "human";
+        switchMode(nextMode);
+      }
+
+      function resetAutoToggle() {
+        clearInterval(autoToggleInterval);
+        autoToggleInterval = setInterval(autoToggle, 7000);
+      }
+
+      // Manual click handlers
+      humanBtn.addEventListener("click", () => {
+        switchMode("human");
+        resetAutoToggle();
+      });
+
+      aiBtn.addEventListener("click", () => {
+        switchMode("ai");
+        resetAutoToggle();
+      });
+
+      // Initialize indicator position
+      updateIndicator(humanBtn);
+
+      // Start auto-toggling
+      resetAutoToggle();
+    });
+
+    // Surprise Me Button Logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const surpriseBtn = document.getElementById("surprise-btn");
+      const surpriseImg = document.getElementById(
+        "surprise-image",
+      ) as HTMLImageElement;
+
+      if (!surpriseBtn || !surpriseImg) return;
+
+      const surpriseImages = [
+        "https://assets.yevgenglukhov.com/images/03-random-ai-01.jpg",
+        "https://assets.yevgenglukhov.com/images/03-random-ai-03.jpg",
+        "https://assets.yevgenglukhov.com/images/03-random-ai-05.jpg",
+        "https://assets.yevgenglukhov.com/images/03-random-ai-07.jpg",
+        "https://assets.yevgenglukhov.com/images/03-random-human-02.jpg",
+        "https://assets.yevgenglukhov.com/images/03-random-human-04.jpg",
+        "https://assets.yevgenglukhov.com/images/03-random-human-06.jpg",
+        "https://assets.yevgenglukhov.com/images/03-random-human-08.jpg",
+      ];
+
+      let currentSrc = surpriseImg.src;
+
+      function getRandomDifferentImage() {
+        let newSrc = currentSrc;
+        while (newSrc === currentSrc && surpriseImages.length > 1) {
+          newSrc =
+            surpriseImages[Math.floor(Math.random() * surpriseImages.length)];
+        }
+        return newSrc;
+      }
+
+      surpriseBtn.addEventListener("click", () => {
+        const newSrc = getRandomDifferentImage();
+
+        surpriseImg.classList.add("fading");
+        setTimeout(() => {
+          surpriseImg.src = newSrc;
+          currentSrc = newSrc;
+          surpriseImg.classList.remove("fading");
+        }, 150);
+      });
+    });
+  </script>
 </Layout>
-
-<style define:vars={{ imageBg }}>
-  /* Image stays independent of the grid's padding constraints */
-  .hero-wrapper {
-    width: 100%;
-    max-width: 1248px;
-    margin: 0 auto;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .hero-img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: min(860px, calc(100vh - 200px));
-    object-fit: contain;
-    display: block;
-    /* background-color: var(--imageBg); Remove background from image itself to let page bg show through padding */
-  }
-
-  /* Override grid top padding to bring text closer to image */
-  .content-grid {
-    padding-top: 4rem;
-  }
-
-  .placeholder-image {
-    width: 100%;
-    height: 100%;
-    background-color: var(--imageBg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--text-secondary);
-    font-size: var(--fs-h3);
-    border-radius: 4px;
-  }
-
-  .label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-  }
-
-  .icon-b {
-    width: 24px;
-    height: 24px;
-  }
-
-  .icon-b :global(svg) {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-  }
-</style>
-
-<script>
-  import mediumZoom from "medium-zoom";
-
-  mediumZoom(".hero-img", {
-    margin: 24,
-    background: "var(--bg-primary)", // Use primary background for zoom overlay
-    scrollOffset: 0,
-  });
-</script>

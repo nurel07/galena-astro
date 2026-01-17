@@ -1,13 +1,18 @@
 ---
-import basaltFavicon from "../assets/basalt-favicon.svg?raw";
+import basaltFavicon from "../assets/basalt-icon-tr.svg?raw";
 import ThemeToggle from "./ThemeToggle.astro";
 
+interface Props {
+    span?: string;
+}
+
+const { span = "6" } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
     <r-grid class="footer-grid" columns="6" columns-s="4" columns-xs="1">
-        <r-cell span="6" span-s="row" span-xs="row">
+        <r-cell span={span} span-s="row" span-xs="row">
             <div class="divider"></div>
             <div class="footer-content">
                 <a href="/" class="brand" aria-label="Go to Home">
@@ -79,14 +84,13 @@ const currentYear = new Date().getFullYear();
     .icon-b :global(svg) {
         width: 100% !important;
         height: 100% !important;
-        fill: currentColor;
         display: block;
     }
 
     .slogan {
         color: var(--text-primary);
         font-size: var(--fs-body-small);
-        font-weight: 500;
+        /* font-weight: 500; */
     }
 
     .links {
@@ -109,13 +113,14 @@ const currentYear = new Date().getFullYear();
     @media (max-width: 600px) {
         .footer-content {
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
+            text-align: center;
             gap: 1.5rem;
         }
 
         .links {
             width: 100%;
-            justify-content: space-between;
+            justify-content: center;
         }
     }
 </style>

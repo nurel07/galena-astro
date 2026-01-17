@@ -23,7 +23,7 @@
     --stone-h: 60;
     --stone-c: 0.02;
 
-    --stone-50: oklch(98% var(--stone-c) var(--stone-h));
+    --stone-50: #fefbf6;
     --stone-100: oklch(95% var(--stone-c) var(--stone-h));
     --stone-200: oklch(90% var(--stone-c) var(--stone-h));
     --stone-300: oklch(80% var(--stone-c) var(--stone-h));
@@ -62,7 +62,7 @@
     --bg-dynamic: var(--stone-900);
     --bg-primary: var(--bg-dynamic);
     --bg-secondary: var(--stone-800);
-    --bg-tertiary: var(--stone-950);
+    --bg-tertiary: var(--stone-600);
 
     --text-primary: var(--stone-50);
     --text-secondary: var(--stone-400);
@@ -131,14 +131,14 @@ h3 {
 
 h1 {
     font-size: var(--fs-h1);
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -0.02em;
 }
 
 h2 {
     font-size: var(--fs-h2);
     line-height: 1.2;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
 }
 
 h3 {
@@ -164,6 +164,21 @@ h3 {
 small {
     font-size: var(--fs-body-small);
     line-height: 1.5;
+}
+
+/* Utility Classes */
+.desktop-only {
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .desktop-only {
+        display: none;
+    }
+}
+
+.section-title {
+    margin-bottom: 1.5rem;
 }
 
 /* Lists */
@@ -196,17 +211,35 @@ r-grid {
     display: grid;
     /* Flatten minmax for full control */
     grid-template-columns: repeat(var(--grid-columns), 1fr);
-    /* Fluid gap */
-    gap: clamp(1rem, 0.5rem + 2.6vw, 2.5rem);
-    /* No max-width or margin here anymore, wrapper handles it */
-    /* Padding for content inside the wrapper */
-    padding: 0 clamp(4rem, -0.15rem + 20vw, 16rem);
+    /* Fixed gap */
+    gap: 4rem;
+    /* 64px */
+
+    /* 1080px Layout Defaults */
+    max-width: 1080px;
+    margin-inline: auto;
+    padding-inline: 0;
+}
+
+@media (max-width: 1150px) {
+    r-grid {
+        padding-inline: 2rem;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    r-grid {
+        gap: 1rem;
+    }
 }
 
 .page-grid {
     padding-top: 8rem;
     padding-bottom: 2rem;
 }
+
+
 
 r-cell {
     grid-column: span var(--grid-span, 1);
@@ -255,12 +288,32 @@ r-cell[span="1-3"] {
     grid-column: 1 / span 3;
 }
 
+r-cell[span="1-4"] {
+    grid-column: 1 / span 4;
+}
+
+r-cell[span="2-5"] {
+    grid-column: 2 / span 4;
+}
+
+r-cell[span="1-5"] {
+    grid-column: 1 / span 5;
+}
+
 r-cell[span="5-6"] {
     grid-column: 5 / span 2;
 }
 
 r-cell[span="3-6"] {
     grid-column: 3 / span 4;
+}
+
+r-cell[span="2-3"] {
+    grid-column: 2 / span 2;
+}
+
+r-cell[span="4-6"] {
+    grid-column: 4 / span 3;
 }
 
 /* Matches example usage somewhat */

@@ -2,11 +2,12 @@
 interface Props {
 	title?: string;
 	backgroundColor?: string;
+	footerSpan?: string;
 }
 
 import Footer from "../components/Footer.astro";
 
-const { title = "Astro Basics", backgroundColor } = Astro.props;
+const { title = "Astro Basics", backgroundColor, footerSpan } = Astro.props;
 ---
 
 <!doctype html>
@@ -58,7 +59,7 @@ const { title = "Astro Basics", backgroundColor } = Astro.props;
 	<body style={backgroundColor ? `background-color: ${backgroundColor}` : ""}>
 		<div class="layout-wrapper">
 			<slot />
-			<Footer />
+			<Footer span={footerSpan} />
 		</div>
 	</body>
 </html>

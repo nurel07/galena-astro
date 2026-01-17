@@ -1,0 +1,393 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+import appleIcon from "../assets/apple-icon.svg?raw";
+import basaltFavicon from "../assets/basalt-favicon.svg?raw";
+
+interface Wallpaper {
+    id: string;
+    url: string;
+    name: string;
+    description: string;
+    artist: string;
+    creationDate: string;
+    dominantColors: string[];
+}
+
+let wallpaper: Wallpaper | null = null;
+let error = false;
+
+try {
+    const response = await fetch(
+        "https://basalt-prod.up.railway.app/api/wallpapers/today",
+    );
+    if (response.ok) {
+        wallpaper = await response.json();
+    } else {
+        error = true;
+    }
+} catch (e) {
+    error = true;
+    console.error("Failed to fetch wallpaper:", e);
+}
+
+// Fallback data if API fails or returns 404
+const displayData = wallpaper || {
+    url: "", // Empty URL will show placeholder
+    name: "Dance I",
+    artist: "Henry Matisse",
+    creationDate: "1965",
+    description:
+        "Henri Matisse's 'Dance (II)' is a seminal work of early 20th-century modernism, epitomizing the Fauvist movement's focus on bold, expressive color and simplified form.",
+    dominantColors: [],
+};
+
+const imageBg =
+    displayData.dominantColors && displayData.dominantColors.length > 0
+        ? displayData.dominantColors[0]
+        : "#E6E3DF";
+
+import { hexToOklch } from "../utils/color";
+
+const [L, C, h] = hexToOklch(imageBg);
+const dynamicH = h.toFixed(2);
+const dynamicC = C.toFixed(4);
+---
+
+<Layout
+    title={`Today's Art: ${displayData.name}`}
+    backgroundColor="var(--bg-dynamic)"
+>
+    <Fragment
+        set:html={`<style>
+    :root[data-theme="dark"] {
+      --bg-dynamic: oklch(0.2 0.05 ${dynamicH}) !important;
+    }
+  </style>`}
+    />
+
+    <!-- Hero Section using grid -->
+    <r-grid
+        class="main content-grid page-grid"
+        columns="6"
+        columns-s="4"
+        columns-xs="1"
+    >
+        <r-cell span="1-5" span-s="row" span-xs="row">
+            <div class="hero-wrapper">
+                {
+                    displayData.url ? (
+                        <img
+                            src={displayData.url}
+                            alt={displayData.name}
+                            class="hero-img"
+                        />
+                    ) : (
+                        <div class="placeholder-image">
+                            <span>Art Placeholder</span>
+                        </div>
+                    )
+                }
+            </div>
+
+            <div style="margin-top: 4rem; padding-right: 2rem;">
+                <h1>
+                    <span style="font-weight: 400;"
+                        >Hand-picked, display-worthy art to your Mac every
+                        sunrise.</span
+                    >
+                    <span style="font-weight: 700; font-style: italic;"
+                        >No algorithms. Just taste.</span
+                    >
+                </h1>
+
+                <div style="margin-top: 4rem;">
+                    <a
+                        href="https://apps.apple.com/us/app/basalt-curated-wallpapers/id6757328187?mt=12"
+                        target="_blank"
+                        class="text-medium download-link"
+                    >
+                        <div class="apple-icon">
+                            <Fragment set:html={appleIcon} />
+                        </div>
+                        Download on the Mac App Store
+                    </a>
+                </div>
+            </div>
+        </r-cell>
+
+        <r-cell span="6-6" span-s="row" span-xs="row" class="content">
+            <div>
+                <p class="text-small" style="margin-top: 0rem;">
+                    <span
+                        style="font-style: italic; display: block; margin-bottom: .5rem;"
+                        >Today's Artwork</span
+                    >
+                    <span style="font-weight: 600; display: block;"
+                        >{displayData.name}</span
+                    >
+                    <span style="color: var(--text-secondary);"
+                        >{displayData.artist}, {displayData.creationDate}</span
+                    >
+                </p>
+            </div>
+        </r-cell>
+    </r-grid>
+
+    <!-- Parallax Features Section -->
+    <div class="parallax-features">
+        <div class="parallax-container">
+            <!-- Text sections that scroll -->
+            <div class="text-stack">
+                <section
+                    class="text-section active"
+                    data-video="https://assets.yevgenglukhov.com/videos/quickstart-01.mp4"
+                >
+                    <div class="text-content">
+                        <h2>Hand-picked art for your Mac</h2>
+                        <p class="text-medium">
+                            Every image is chosen, not scrapped. No algorithm
+                            dumps. No random noise. Just bold, display-worthy
+                            art — selected to actually look good on your Mac.
+                        </p>
+                    </div>
+                </section>
+
+                <section
+                    class="text-section"
+                    data-video="https://assets.yevgenglukhov.com/videos/quickstart-02.mp4"
+                >
+                    <div class="text-content">
+                        <h2>New Day, New Art</h2>
+                        <p class="text-medium">
+                            Fresh art at sunrise. Or right now. A new wallpaper
+                            lands every morning. Can't wait? Hit "Surprise Me"
+                            and pull something unexpected from the vault.
+                        </p>
+                    </div>
+                </section>
+
+                <section
+                    class="text-section"
+                    data-video="https://assets.yevgenglukhov.com/videos/quickstart-03.mp4"
+                >
+                    <div class="text-content">
+                        <h2>Human & AI</h2>
+                        <p class="text-medium">
+                            Two channels. Your call. Classic masterworks or
+                            AI-generated visions — mix them, switch between
+                            them, or pick a side. You're in control.
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sticky video container -->
+            <div class="video-container">
+                <video
+                    id="feature-video"
+                    class="feature-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    src="https://assets.yevgenglukhov.com/videos/quickstart-01.mp4"
+                ></video>
+            </div>
+        </div>
+    </div>
+
+    <style define:vars={{ imageBg }}>
+        .hero-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .hero-img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: min(860px, calc(100vh - 200px));
+            object-fit: contain;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .content-grid {
+            padding-top: 4rem;
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            background-color: var(--imageBg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: var(--fs-h3);
+            border-radius: 4px;
+        }
+
+        .download-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .apple-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Parallax Features Section */
+        .parallax-features {
+            margin-top: 6rem;
+        }
+
+        .parallax-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .video-container {
+            position: sticky;
+            top: 4rem;
+            height: fit-content;
+            align-self: start;
+        }
+
+        .feature-video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            background-color: var(--bg-secondary);
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-video.fading {
+            opacity: 0.5;
+        }
+
+        .text-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .text-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            opacity: 0.3;
+            transition: opacity 0.4s ease;
+        }
+
+        .text-section.active {
+            opacity: 1;
+        }
+
+        .text-content {
+            padding: 2rem 0;
+        }
+
+        .text-content h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mobile: stack normally */
+        @media (max-width: 900px) {
+            .parallax-container {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .video-container {
+                position: relative;
+                top: 0;
+                order: -1; /* Video first on mobile */
+            }
+
+            .text-section {
+                min-height: auto;
+                opacity: 1;
+                padding: 1rem 0;
+            }
+
+            .text-stack {
+                gap: 2rem;
+            }
+        }
+    </style>
+
+    <script>
+        import mediumZoom from "medium-zoom";
+
+        mediumZoom(".hero-img", {
+            margin: 24,
+            background: "var(--bg-primary)",
+            scrollOffset: 0,
+        });
+
+        // Parallax video swap logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const video = document.getElementById(
+                "feature-video",
+            ) as HTMLVideoElement;
+            const sections = document.querySelectorAll(".text-section");
+            let currentVideoSrc = video?.src || "";
+
+            if (!video || sections.length === 0) return;
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        const section = entry.target as HTMLElement;
+
+                        if (
+                            entry.isIntersecting &&
+                            entry.intersectionRatio > 0.5
+                        ) {
+                            sections.forEach((s) =>
+                                s.classList.remove("active"),
+                            );
+                            section.classList.add("active");
+
+                            const newSrc = section.dataset.video;
+                            if (newSrc && newSrc !== currentVideoSrc) {
+                                video.classList.add("fading");
+
+                                setTimeout(() => {
+                                    video.src = newSrc;
+                                    video.load();
+                                    video.play();
+                                    currentVideoSrc = newSrc;
+                                    video.classList.remove("fading");
+                                }, 150);
+                            }
+                        }
+                    });
+                },
+                {
+                    root: null,
+                    rootMargin: "-20% 0px -20% 0px",
+                    threshold: [0.5],
+                },
+            );
+
+            sections.forEach((section) => observer.observe(section));
+        });
+    </script>
+</Layout>
