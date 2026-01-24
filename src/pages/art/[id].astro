@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Button from "../../components/Button.astro";
 import appleIcon from "../../assets/apple-icon.svg?raw";
 import basaltFavicon from "../../assets/basalt-icon-tr.svg?raw";
+import downloadIcon from "../../assets/download-icon.svg?raw";
 
 interface Wallpaper {
     id: string;
@@ -71,11 +72,21 @@ const dynamicC = C.toFixed(4);
     <div class="hero-wrapper">
         {
             displayData.url ? (
-                <img
-                    src={displayData.url}
-                    alt={displayData.name}
-                    class="hero-img"
-                />
+                <div class="hero-content">
+                    <img
+                        src={displayData.url}
+                        alt={displayData.name}
+                        class="hero-img"
+                    />
+                    <a
+                        href={displayData.url}
+                        target="_blank"
+                        class="download-link"
+                        aria-label="Download full size image"
+                    >
+                        <Fragment set:html={downloadIcon} />
+                    </a>
+                </div>
             ) : (
                 <div class="placeholder-image">
                     <span>Art Placeholder</span>
@@ -140,6 +151,40 @@ const dynamicC = C.toFixed(4);
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: fit-content;
+        max-width: 100%;
+        gap: 0.5rem;
+    }
+
+    .download-link {
+        color: var(--text-secondary);
+        width: 18px;
+        height: 18px;
+        transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .download-link:hover {
+        color: var(--text-primary);
+    }
+
+    .download-link :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .download-link {
+            display: none;
+        }
     }
 
     .hero-img {
